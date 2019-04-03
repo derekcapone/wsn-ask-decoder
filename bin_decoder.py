@@ -39,3 +39,11 @@ def decode_byte(bin_arr):
     byte = (reverse_symbols[high_nib] << 4) | reverse_symbols[low_nib]
 
     return byte, bin_arr[12:]
+
+
+def get_bytes(binary_arr, count):
+    payload = []
+    temp_arr = binary_arr
+    for i in range(0, count):
+        byte, temp_arr = decode_byte(temp_arr)
+        payload += [byte]
