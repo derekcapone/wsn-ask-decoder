@@ -1,30 +1,65 @@
 import signal_find as sf
 import bin_decoder as bd
+import sys
 
 
 class Frame:
     dev_num = None
     dev_type = None
     maint_num = None
+    pl_size = None
     payload = None
 
 
-def frame_decode(payload):
-    dev_num_size = 2
-    dev_type_size = 1
-    maint_size = 1
-    payload_size = 1
-    rec_frame = Frame()
+def log_frame(frame):
+    f = open("frame_logs.txt", 'a+')
+    f.write("Device number: %d\n" % frame.dev_num)
+    f.write("Device Type: %d\n" % frame.dev_type)
+    f.write("Need for maintenance: %d\n" % frame.maint_num)
+    f.write("Monitoring Payload: %d\n\n" % frame.payload)
 
-    rec_frame.dev_num = payload[:dev_num_size]
-    print(rec_frame.dev_num)
+
+def frame_decode(pl):
+    rec_frame = Frame()
+    dev_num_size = 2  # size of device number in frame (bytes)
+
+    # extract device number
+    rec_frame.dev_num, pl = reconstruct_bytes(pl, dev_num_size)
+
+    # extract device type
+    rec_frame.dev_type = pl[0]
+    pl = pl[1:]
+
+    # extract maintenance number
+    rec_frame.maint_num = pl[0]
+    pl = pl[1:]
+
+    rec_frame.pl_size = pl[0]
+    pl = pl[1:]
+
+    # extract monitoring payload
+    # TODO: change this for variable size payload
+    rec_frame.payload = pl[0]
+
+    return rec_frame
+
+
+def reconstruct_bytes(payload, num_bytes):
+    byte_val = 0
+    for i in range(0, num_bytes):
+        byte_val |= payload[i] << (num_bytes-i-1)*8
+    return byte_val, payload[num_bytes:]
 
 
 def checksum_calc(arr):
-    sum = 0
-    for byte in arr:
-        sum += byte
-    return sum % 256
+    sum_val = sum(arr)
+    return sum_val % 256
+
+
+def verify_checksum(payload):
+    checksum = payload[-1]
+    temp_pl = payload[:-1]
+    return checksum == checksum_calc(temp_pl)
 
 
 file_name = "sig_file.dat"
@@ -32,6 +67,11 @@ file_name = "sig_file.dat"
 binary_arr = sf.get_bin_array(file_name)
 count, binary_arr = bd.decode_byte(binary_arr)
 payload = bd.get_bytes(binary_arr, count)
-frame_decode(payload)
+print(payload)
 
+if not verify_checksum(payload):
+    print("Checksum incorrect. Dropping packet...")
+    sys.exit()
 
+rec_frame = frame_decode(payload)
+log_frame(rec_frame)

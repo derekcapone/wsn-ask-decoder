@@ -9,7 +9,6 @@ This script performs the following functions:
 
 import scipy
 import sys
-import matplotlib.pyplot as plt
 
 preamble_length = 35  # preamble length
 exp_preamble = [1, 0, 1, 0, 1, 0,  # expected preamble

@@ -1,0 +1,15 @@
+Device number: 4
+Device Type: 2
+Need for maintenance: 0
+Monitoring Payload: 164
+
+Device number: 4
+Device Type: 2
+Need for maintenance: 0
+Monitoring Payload: 164
+
+Device number: 4
+Device Type: 2
+Need for maintenance: 0
+Monitoring Payload: 164
+

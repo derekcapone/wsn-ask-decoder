@@ -6,9 +6,6 @@ This is used assuming that:
  - array starts at beginning of "Count" section of frame
 """
 
-symbols = [0xd,  0xe,  0x13, 0x15, 0x16, 0x19, 0x1a, 0x1c,
-           0x23, 0x25, 0x26, 0x29, 0x2a, 0x2c, 0x32, 0x34]
-
 # reverse table to convert back to bytes from 6 bit chunks
 reverse_symbols = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                    0, 0, 0, 0, 1, 0, 0, 0, 0, 2,
