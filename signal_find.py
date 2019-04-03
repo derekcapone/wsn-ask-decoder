@@ -22,8 +22,8 @@ exp_preamble = [1, 0, 1, 0, 1, 0,  # expected preamble
 
 def get_raw_signal(f_name):
     signal = scipy.fromfile(open(f_name), dtype=scipy.float32)
-    plt.plot(signal)
-    plt.show()
+    # plt.plot(signal)
+    # plt.show()
     return signal
 
 
