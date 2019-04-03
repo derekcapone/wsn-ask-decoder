@@ -13,6 +13,6 @@ file_name = "sig_file.dat"
 
 binary_arr = sf.get_bin_array(file_name)
 count, binary_arr = bd.decode_byte(binary_arr)
-
+payload = bd.get_bytes(binary_arr, count)
 
 

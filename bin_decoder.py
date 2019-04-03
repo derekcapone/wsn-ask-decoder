@@ -6,11 +6,6 @@ This is used assuming that:
  - array starts at beginning of "Count" section of frame
 """
 
-import scipy
-import _tkinter
-import matplotlib.pyplot as plt
-
-
 symbols = [0xd,  0xe,  0x13, 0x15, 0x16, 0x19, 0x1a, 0x1c,
            0x23, 0x25, 0x26, 0x29, 0x2a, 0x2c, 0x32, 0x34]
 
@@ -43,7 +38,7 @@ def decode_byte(bin_arr):
 
 def get_bytes(binary_arr, count):
     payload = []
-    temp_arr = binary_arr
     for i in range(0, count):
-        byte, temp_arr = decode_byte(temp_arr)
+        byte, binary_arr = decode_byte(binary_arr)
         payload += [byte]
+    return payload
