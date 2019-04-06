@@ -15,8 +15,8 @@ def log_frame(frame):
     f = open("frame_logs.txt", 'a+')
     f.write("Device number: %d\n" % frame.dev_num)
     f.write("Device Type: %d\n" % frame.dev_type)
-    f.write("Need for maintenance: %d\n" % frame.maint_num)
-    f.write("Monitoring Payload: %d\n\n" % frame.payload)
+    f.write("Transmissions since maintenance: %d\n" % frame.maint_num)
+    f.write("Monitoring Payload: %s\n\n" % hex(frame.payload))
 
 
 def frame_decode(pl):
@@ -38,8 +38,8 @@ def frame_decode(pl):
     pl = pl[1:]
 
     # extract monitoring payload
-    # TODO: change this for variable size payload
     rec_frame.payload = pl[0]
+    rec_frame.payload, pl = reconstruct_bytes(pl, rec_frame.pl_size)
 
     return rec_frame
 
