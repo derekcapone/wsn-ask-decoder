@@ -3,3 +3,13 @@ Device Type: 2
 Transmissions since maintenance: 0
 Monitoring Payload: 0xa4
 
+Device number: 4
+Device Type: 2
+Transmissions since maintenance: 0
+Monitoring Payload: 0xa4
+
+Device number: 4
+Device Type: 2
+Transmissions since maintenance: 0
+Monitoring Payload: 0xa4
+

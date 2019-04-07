@@ -62,7 +62,7 @@ def verify_checksum(payload):
     return checksum == checksum_calc(temp_pl)
 
 
-file_name = "sig_file.dat"
+file_name = "./signal_files/sig_file.dat"
 
 binary_arr = sf.get_bin_array(file_name)
 count, binary_arr = bd.decode_byte(binary_arr)
