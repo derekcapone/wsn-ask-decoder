@@ -1,9 +1,10 @@
 """
-This script is used decode the binary in the sampled ASK array
+This script is used to:
+ - decode the binary in the sampled ASK array
+ - calculates the byte information from binary array
 This is used assuming that:
- - Preamble and start symbol is removed from signal array
+ - Preamble and start symbol is removed from signal binary array
  - Bit length in samples is calculated
- - array starts at beginning of "Count" section of frame
 """
 
 # reverse table to convert back to bytes from 6 bit chunks
@@ -34,6 +35,12 @@ def decode_byte(bin_arr):
 
 
 def get_bytes(binary_arr, count):
+    """
+    Decodes the binary array to get array of bytes
+    :param binary_arr: binary array of signal
+    :param count:
+    :return:
+    """
     payload = []
     for i in range(0, count):
         byte, binary_arr = decode_byte(binary_arr)

@@ -20,10 +20,8 @@ exp_preamble = [1, 0, 1, 0, 1, 0,  # expected preamble
 
 
 def get_raw_signal(f_name):
-    signal = scipy.fromfile(open(f_name), dtype=scipy.float32)
-    # plt.plot(signal)
-    # plt.show()
-    return signal
+    """ returns signal samples in form of an array """
+    return scipy.fromfile(open(f_name), dtype=scipy.float32)
 
 
 def get_bit_length(raw_sig):
@@ -86,6 +84,7 @@ def calc_num_bits(bit_len, len):
 def get_bin_array(f_name):
     """
     Produces binary array from raw signal input (file)
+    Exits the program if preamble is incorrect
     :return: binary array of signal (excluding preamble)
     """
     raw_signal = get_raw_signal(f_name)
