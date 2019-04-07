@@ -12,7 +12,7 @@ class Frame:
 
 
 def log_frame(frame):
-    f = open("frame_logs.txt", 'a+')
+    f = open("../frame_logs.txt", 'a+')
     f.write("Device number: %d\n" % frame.dev_num)
     f.write("Device Type: %d\n" % frame.dev_type)
     f.write("Transmissions since maintenance: %d\n" % frame.maint_num)
@@ -62,7 +62,7 @@ def verify_checksum(payload):
     return checksum == checksum_calc(temp_pl)
 
 
-file_name = "./signal_files/sig_file.dat"
+file_name = "../signal_files/sig_file.dat"
 
 binary_arr = sf.get_bin_array(file_name)
 count, binary_arr = bd.decode_byte(binary_arr)
